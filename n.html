@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO.EXE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #00ff00;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(45deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 30px;
+            border-right: 2px solid #00ff00;
+            padding-right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #00ff00; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: 2px solid #00ff00;
+            background: transparent;
+            color: #00ff00;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .btn-secondary {
+            border-color: #666;
+            color: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #666;
+            color: #000;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 100px 0;
+            background: #111;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #00ff00;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .skill-list {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .skill-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Status Terminal */
+        .status-terminal {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 40px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-header {
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .terminal-content {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #00ff00;
+            margin: 20px auto;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #888;
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #00ff00;
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #333, #555);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #666;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .project-link:hover {
+            border-bottom-color: #00ff00;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 100px 0;
+            background: #111;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: #00ff00;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            padding: 30px;
+            margin-left: 60%;
+            width: 40%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: 60%;
+        }
+
+        .timeline-title {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-company {
+            color: #00ff00;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .timeline-description {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            padding: 15px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #00ff00;
+        }
+
+        .contact-text {
+            color: #ccc;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: #666;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: #00ff00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                margin-left: 50px;
+                width: auto;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 50px;
+                margin-right: 0;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">PORTFOLIO.EXE</div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#experience">EXPERIENCE</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>PORTFOLIO.EXE</h1>
+            <h2>> FULL STACK DEVELOPER</h2>
+            <p class="hero-description">
+                Hi, my name is <strong>AAKASHEE</strong>. I am a software Engineer, a true
+                definition of a Philomath and a Tech addict. I strive to bring
+                innovative ideas to life. My goal is to craft seamless digital
+                experiences that not only meet but exceed client expectations.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">VIEW PROJECTS</a>
+                <a href="#contact" class="btn btn-secondary">DOWNLOAD CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">ABOUT.TXT</h2>
+            <p class="section-description fade-in">
+                I'm a passionate software developer with a love for creating digital
+                experiences that matter. My journey in tech started with curiosity and
+                has evolved into a commitment to building softwares and solutions that
+                bridge creativity and functionality.
+            </p>
+
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">&lt;/&gt;</div>
+                    <h3>FRONTEND</h3>
+                    <div class="skill-list">
+                        React, TypeScript,<br>
+                        Next.js, Tailwind CSS
+                    </div>
+                    <div class="skill-description">
+                        Building responsive and
+                        interactive user interfaces
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">⚡</div>
+                    <h3>BACKEND</h3>
+                    <div class="skill-list">
+                        Node.js, Express.js,<br>
+                        MongoDB
+                    </div>
+                    <div class="skill-description">
+                        Scalable server-side
+                        applications and APIs
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">📱</div>
+                    <h3>MOBILE APPLICATIONS</h3>
+                    <div class="skill-list">
+                        ReactNative, Expo
+                    </div>
+                    <div class="skill-description">
+                        Building cross-platform
+                        mobile experiences with
+                        native performance
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">🌐</div>
+                    <h3>DEPLOYMENT</h3>
+                    <div class="skill-list">
+                        AWS, Docker, Vercel,<br>
+                        CI/CD, Github, Pxxi
+                    </div>
+                    <div class="skill-description">
+                        Automated deployment and
+                        cloud infrastructure
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-terminal fade-in">
+                <div class="terminal-header">> CURRENT STATUS: AVAILABLE FOR PROJECTS</div>
+                <div class="terminal-content">
+                    Ready to collaborate on your next big idea
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">PROJECTS.DIR</h2>
+            <p class="section-description fade-in">
+                A collection of projects showcasing different aspects of modern web
+                development, from user interfaces to backend architecture.
+            </p>
+
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">E-COMMERCE</div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-COMMERCE.WEB</h3>
+                        <p class="project-description">
+                            An e-commerce store for customized stickers
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">TailwindCSS</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">📋 CODE</a>
+                            <a href="#" class="project-link">🔗 DEMO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">COFFEE</div>
+                    <div class="project-content">
+                        <h3 class="project-title">CAFE.WEB</h3>
+                        <p class="project-description">
+                            A website for a cafe to showcase what they do, events and promote
+                            their products
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TailwindCSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">📋 CODE</a>
+                            <a href="#" class="project-link">🔗 DEMO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">SPA BOOKING</div>
+                    <div class="project-content">
+                        <h3 class="project-title">SPA-BOOKING.WEB</h3>
+                        <p class="project-description">
+                            A web application that streamlines spa appointment scheduling for
+                            both customers and spa administrators.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Express</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">📋 CODE</a>
+                            <a href="#" class="project-link">🔗 DEMO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">NEWS BLOG</div>
+                    <div class="project-content">
+                        <h3 class="project-title">BLOG.WEB</h3>
+                        <p class="project-description">
+                            blog website where users can read blogs. The blogs are gotten from
+                            gnews api
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Tailwind</span>
+                            <span class="tech-tag">Gnews API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">📋 CODE</a>
+                            <a href="#" class="project-link">🔗 DEMO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title fade-in">EXPERIENCE.LOG</h2>
+            <p class="section-description fade-in">
+                My professional journey through the tech industry, working with
+                innovative companies and delivering impactful solutions.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Software Engineer</h3>
+                        <p class="timeline-company">Silicon Delta Innovation Hub</p>
+                        <p class="timeline-date">2024 - 2025 📍 Bengaluru,Karnataka,560078</p>
+                        <p class="timeline-description">
+                            Developed responsive user interfaces for client
+                            projects. Collaborated with UX designers to implement
+                            pixel-perfect designs.
+                        </p>
+                        <div class="project-tech" style="margin-top: 15px;">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">ReactNative</span>
+                            <span class="tech-tag">Expo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">FrontEnd Developer</h3>
+                        <p class="timeline-company">Let's Build Labs</p>
+                        <p class="timeline-date">2025 - Present 📍 Remote</p>
+                        <p class="timeline-description">
+                            Led development of scalable web3 applications using
+                            NextJS. Implemented CI/CD pipelines reducing deployment
+                            time by 40%.
+                        </p>
+                        <div class="project-tech" style="margin-top: 15px;">
+                            <span class="tech-tag">NextJS</span>
+                            <span class="tech-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-terminal fade-in">
+                <div class="terminal-header">> TOTAL EXPERIENCE: 2 YEARS</div>
+                <div class="terminal-content">
+                    Continuously learning and evolving with technology
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">CONTACT.EXE</h2>
+            <p class="section-description fade-in">
+                Ready to collaborate on your next project? Let's connect and build
+                something amazing together.
+            </p>
+
+            <div class="contact-content">
+                <div class="contact-form fade-in">
+                    <h3 style="color: #fff; margin-bottom: 20px;">SEND MESSAGE</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>NAME</label>
+                            <input type="text" placeholder="Your name">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>EMAIL</label>
+                            <input type="email" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>SUBJECT</label>
+                        <input type="text" placeholder="Project inquiry">
+                    </div>
+                    <div class="form-group">
+                        <label>MESSAGE</label>
+                        <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button class="btn" style="align-self: flex-start;">✈ SEND MESSAGE</button>
+                </div>
+
+                <div class="contact-info fade-in">
+                    <h3 style="color: #fff; margin-bottom: 20px;">GET IN TOUCH</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">✉</div>
+                        <div class="contact-text">
+                            <strong>EMAIL</strong><br>
+                            aakashpatra253@gmail.com
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <strong>PHONE</strong><br>
+                            +91 88616 53961
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <strong>LOCATION</strong><br>
+                            Bengaluru, KARNATAKA,560078
+                        </div>
+                    </div>
+
+                    <h4 style="color: #fff; margin-top: 30px;">SOCIAL LINKS</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Github">
+                            <span style="font-size: 1.2rem;">⚡</span>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <span style="font-size: 1.2rem;">💼</span>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <span style="font-size: 1.2rem;">🐦</span>
+                        </a>
+                    </div>
+
+                    <div class="status-terminal" style="margin-top: 30px;">
+                        <div class="terminal-header">> STATUS: AVAILABLE FOR WORK</div>
+                        <div class="terminal-content">
+                            Currently accepting new projects and collaborations.<br>
+                            Response time: immediately
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>PORTFOLIO.EXE</strong><br>
+                    Full-stack developer passionate about<br>
+                    creating digital experiences that bridge<br>
+                    creativity and functionality.
+                </div>
+                <div class="footer-links">
+                    <a href="#home">HOME</a>
+                    <a href="#about">ABOUT</a>
+                    <a href="#experience">EXPERIENCE</a>
+                    <a href="#projects">PROJECTS</a>
+                    <a href="#contact">CONTACT</a>
+                </div>
+                <div style="text-align: right;">
+                    <div style="color: #666; margin-bottom: 10px;">
+                        © 2025 PORTFOLIO.EXE - ALL RIGHTS RESERVED
+                    </div>
+                    <div style="font-size: 0.8rem;">
+                        BUILT WITH NEXTJS + TYPESCRIPT + TAILWIND CSS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Typewriter effect for hero subtitle
+        const typewriterText = document.querySelector('.hero h2');
+        const originalText = '> FULL STACK DEVELOPER';
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < originalText.length) {
+                typewriterText.textContent = originalText.slice(0, index + 1);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else {
+                // Add blinking cursor animation
+                typewriterText.style.borderRight = '2px solid #00ff00';
+                typewriterText.style.animation = 'blink 1s infinite';
+            }
+        }
+
+        // Start typewriter effect after page loads
+        window.addEventListener('load', () => {
+            typewriterText.textContent = '>';
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Terminal typing effect for status messages
+        function typeTerminalMessage(element, message, speed = 50) {
+            let index = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (index < message.length) {
+                    element.textContent += message.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            setTimeout(type, 500);
+        }
+
+        // Add terminal typing effect when status terminals come into view
+        const statusTerminals = document.querySelectorAll('.terminal-content');
+        statusTerminals.forEach(terminal => {
+            const originalText = terminal.textContent;
+            
+            const terminalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !terminal.hasAttribute('data-typed')) {
+                        terminal.setAttribute('data-typed', 'true');
+                        typeTerminalMessage(terminal, originalText);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            terminalObserver.observe(terminal);
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.boxShadow = '0 20px 40px rgba(0, 255, 0, 0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-5px) scale(1)';
+                card.style.boxShadow = 'none';
+            });
+        });
+
+        // Add glitch effect to title on hover
+        const title = document.querySelector('.hero h1');
+        title.addEventListener('mouseenter', () => {
+            title.style.textShadow = `
+                0 0 5px #00ff00,
+                0 0 10px #00ff00,
+                0 0 15px #00ff00,
+                0 0 20px #00ff00,
+                0 0 35px #00ff00,
+                0 0 40px #00ff00
+            `;
+        });
+        
+        title.addEventListener('mouseleave', () => {
+            title.style.textShadow = '0 0 20px rgba(0, 255, 0, 0.5)';
+        });
+
+        // Form submission handler
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            const submitButton = e.target.querySelector('.btn');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = '> SENDING...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                submitButton.textContent = '> MESSAGE SENT!';
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    e.target.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Add matrix rain effect to background
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.05';
+            
+            document.body.appendChild(canvas);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const matrix = '01';
+            const matrixArray = matrix.split('');
+            
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            
+            const drops = [];
+            for(let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 35);
+            
+            // Resize canvas when window is resized
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Initialize matrix rain effect
+        setTimeout(createMatrixRain, 2000);
+
+        // Add floating animation to skill cards
+        document.querySelectorAll('.skill-card').forEach((card, index) => {
+            card.style.animation = `float 6s ease-in-out infinite`;
+            card.style.animationDelay = `${index * 0.5}s`;
+        });
+
+        // CSS animation for floating effect
+        const floatKeyframes = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = floatKeyframes;
+        document.head.appendChild(styleSheet);
+
+        // Add progress bar for page scroll
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff00, #00aa00);
+            z-index: 9999;
+            transition: width 0.3s ease;
+        `;
+        document.body.appendChild(progressBar);
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+    </script>
+</body>
+</html>
