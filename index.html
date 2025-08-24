@@ -976,21 +976,48 @@
         });
 
         // Typewriter effect for hero subtitle
-        const typewriterText = document.querySelector('.hero h2');
-        const originalText = '> FULL STACK DEVELOPER';
-        let index = 0;
-        
-        function typeWriter() {
-            if (index < originalText.length) {
-                typewriterText.textContent = originalText.slice(0, index + 1);
-                index++;
-                setTimeout(typeWriter, 100);
-            } else {
-                // Add blinking cursor animation
-                typewriterText.style.borderRight = '2px solid #00ff00';
-                typewriterText.style.animation = 'blink 1s infinite';
-            }
+         const typewriterText = document.querySelector('.hero h2');
+    const roles = [
+      "> FULL STACK DEVELOPER",
+      "> COMPETETIVE PROGRAMMER",
+      "> TECH ADDICT",
+      "> PHILOMATH"
+    ];
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      let currentRole = roles[roleIndex];
+
+      if (!deleting) {
+        // typing
+        typewriterText.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentRole.length) {
+          deleting = true;
+          setTimeout(typeLoop, 2000); // pause before deleting
+          return;
         }
+      } else {
+        // deleting
+        typewriterText.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length; // loop roles
+        }
+      }
+
+      setTimeout(typeLoop, deleting ? 50 : 100);
+    }
+
+    window.addEventListener('load', () => {
+      typeLoop();
+    });
 
         // Start typewriter effect after page loads
         window.addEventListener('load', () => {
@@ -1204,5 +1231,99 @@
             progressBar.style.width = scrollPercent + '%';
         });
     </script>
+    <div class="marquee">> SYSTEM ONLINE > PORTFOLIO.EXE RUNNING > WELCOME USER</div>
+    
+
+<style>
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  color: #00ff00;
+}
+.marquee::before {
+  content: attr(data-text);
+}
+.marquee {
+  display: inline-block;
+  animation: scroll 15s linear infinite;
+}
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+<script>
+// ---- Terminal message looper (type → hold → erase → next) ----
+function cycleTerminal(terminal, messages, typingSpeed = 40, holdMs = 1500, eraseSpeed = 25) {
+  let msgIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function tick() {
+    const current = messages[msgIndex];
+
+    if (!deleting) {
+      // typing forward
+      terminal.textContent = current.slice(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === current.length) {
+        // reached full message, hold before erasing
+        deleting = true;
+        setTimeout(tick, holdMs);
+        return;
+      }
+
+      setTimeout(tick, typingSpeed);
+    } else {
+      // erasing backward
+      terminal.textContent = current.slice(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        deleting = false;
+        msgIndex = (msgIndex + 1) % messages.length; // next message
+        setTimeout(tick, 200); // small pause before next type
+        return;
+      }
+
+      setTimeout(tick, eraseSpeed);
+    }
+  }
+
+  // start with a short intro delay for vibe ✨
+  setTimeout(tick, 400);
+}
+
+// Messages to loop
+const statusMessages = [
+  "Continuously learning and evolving with technology",
+  "Currently accepting new projects and collaborations.",
+  "Response time: immediately"
+];
+
+// Option A: Start looping as soon as the elements are visible (saves CPU)
+const terminals = document.querySelectorAll(".terminal-content");
+terminals.forEach((terminal) => {
+  // prevent double-initialization
+  if (terminal.dataset.loopInit === "1") return;
+  terminal.dataset.loopInit = "1";
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !terminal.dataset.loopStarted) {
+        terminal.dataset.loopStarted = "1";
+        cycleTerminal(terminal, statusMessages);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  io.observe(terminal);
+});
+</script>
+
+
 </body>
 </html>
